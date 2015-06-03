@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <SM_Slider>
+            <active>true</active>
+            <codePool>local</codePool>
+        </SM_Slider>
+    </modules>
+</config>
