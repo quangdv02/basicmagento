@@ -1,3 +1,7 @@
+<?php
+    $type = $this->getType();
+    $qty = $this->getQty();
+?>
 <div class="swiper-container">
     <div class="swiper-wrapper">
         <div class="swiper-slide">Slide 1</div>
@@ -12,19 +16,45 @@
         <div class="swiper-slide">Slide 10</div>
     </div>
     <!-- Add Pagination -->
+    <?php if($type != 1):?>
     <div class="swiper-pagination"></div>
+    <?php endif;?>
     <!-- Add Arrows -->
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
+    <?php if($type == 4):?>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    <?php endif;?>
 </div>
 <script>
     jQuery(document).ready(function(){
-        var swiper = new Swiper('.swiper-container', {
-            pagination: '.swiper-pagination',
-            paginationClickable: '.swiper-pagination',
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-            spaceBetween: 30
-        });
+        var type = <?php echo $this->getType(); ?>;
+        switch(type){
+            case '1':
+                var swiper = new Swiper('.swiper-container');
+                break;
+            case '2':
+                var swiper = new Swiper('.swiper-container', {
+                    pagination: '.swiper-pagination',
+                    paginationClickable: true
+                });
+                break;
+            case '3':
+                var swiper = new Swiper('.swiper-container', {
+                    pagination: '.swiper-pagination',
+                    paginationClickable: true,
+                    direction: 'vertical'
+                });
+                break;
+            default :
+                var swiper = new Swiper('.swiper-container', {
+                    pagination: '.swiper-pagination',
+                    paginationClickable: '.swiper-pagination',
+                    nextButton: '.swiper-button-next',
+                    prevButton: '.swiper-button-prev',
+                    spaceBetween: 30
+                });
+                break;
+        }
+
     });
 </script>
