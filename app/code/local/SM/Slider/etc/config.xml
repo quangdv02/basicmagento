@@ -1,7 +1,7 @@
 <config>
     <modules>
         <SM_Slider>
-            <version>0.1.0</version>
+            <version>0.1.1</version>
         </SM_Slider>
     </modules>
     <frontend>
@@ -24,9 +24,38 @@
     </frontend>
     <global>
         <models>
+            <inchoo_dbscript>
+                <class>Inchoo_DBScript_Model</class>
+                <resourceModel>inchoo_dbscript_resource</resourceModel>
+            </inchoo_dbscript>
+            <inchoo_dbscript_resource>
+                <class>Inchoo_DBScript_Model_Resource</class>
+                <entities>
+                    <ticket>
+                        <table>inchoo_dbscript_ticket</table>
+                    </ticket>
+                    <comment>
+                        <table>inchoo_dbscript_comment</table>
+                    </comment>
+                </entities>
+            </inchoo_dbscript_resource>
+        </models>
+        <models>
             <slider>
                 <class>SM_Slider_Model</class>
+                <resourceModel>slider_resource</resourceModel>
             </slider>
+            <slider_resource>
+                <class>SM_Slider_Model_Resource</class>
+                <entities>
+                    <slider>
+                        <table>sm_slider</table>
+                    </slider>
+                    <image>
+                        <table>sm_slider_image</table>
+                    </image>
+                </entities>
+            </slider_resource>
         </models>
         <blocks>
             <slider>
@@ -38,6 +67,16 @@
                 <class>SM_Slider_Helper</class>
             </slider>
         </helpers>
+        <resources>
+            <sm_slider_setup>
+                <setup>
+                    <module>SM_Slider</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </sm_slider_setup>
+        </resources>
     </global>
     <admin>
         <routers>
