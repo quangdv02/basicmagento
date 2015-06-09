@@ -1,50 +1,85 @@
 <?php
-class SM_Slider_Block_Adminhtml_Slider_Edit_Tab_Image extends Mage_Adminhtml_Block_Widget_Form{
-    protected function _prepareForm()
+class SM_Slider_Block_Adminhtml_Slider_Edit_Tab_Image extends Mage_Adminhtml_Block_Widget_Grid{
+    public function __construct()
     {
-        $form = new Varien_Data_Form();
-        $this->setForm($form);
-        $fieldset = $form->addFieldset('slider_form', array('legend'=>Mage::helper('slider')->__('Slider information')));
-
-        $fieldset->addField('title', 'text', array(
-            'label'     => Mage::helper('slider')->__('Title'),
-            'class'     => 'required-entry',
-            'required'  => true,
-            'name'      => 'title',
-        ));
-
-        $fieldset->addField('status', 'select', array(
-            'label'     => Mage::helper('slider')->__('Status'),
-            'name'      => 'status',
-            'values'    => array(
-                array(
-                    'value'     => 1,
-                    'label'     => Mage::helper('slider')->__('Active'),
-                ),
-
-                array(
-                    'value'     => 0,
-                    'label'     => Mage::helper('slider')->__('Inactive'),
-                ),
-            ),
-        ));
-
-        $fieldset->addField('content', 'editor', array(
-            'name'      => 'content',
-            'label'     => Mage::helper('slider')->__('Content'),
-            'title'     => Mage::helper('slider')->__('Content'),
-            'style'     => 'width:98%; height:200px;',
-            'wysiwyg'   => false,
-            'required'  => true,
-        ));
-
-        if ( Mage::getSingleton('adminhtml/session')->getSliderData() )
-        {
-            $form->setValues(Mage::getSingleton('adminhtml/session')->getSliderData());
-            Mage::getSingleton('adminhtml/session')->setSliderData(null);
-        } elseif ( Mage::registry('slider_data') ) {
-            $form->setValues(Mage::registry('slider_data')->getData());
-        }
-        return parent::_prepareForm();
+        parent::__construct();
+        $this->setId('imageGrid');
+        $this->setDefaultSort('entity_id');
+        $this->setDefaultDir('DESC');
+        $this->setSaveParametersInSession(true);
+        $this->setUseAjax(true);
     }
+
+    // add button new image
+    public function getMainButtonsHtml()
+    {
+        $sliderId = Mage::app()->getRequest()->getParam('id');
+        $html = parent::getMainButtonsHtml(); //get the parent class buttons
+        $addButton = $this->getLayout()->createBlock('adminhtml/widget_button') //create the add button
+        ->setData(array(
+                'label' => Mage::helper('adminhtml')->__('Add New Image'),
+                'onclick' => "setLocation('" . $this->getUrl('*/*/newimage/slider_id/' . $sliderId) . "')",
+                'class' => 'add'
+            ))->toHtml();
+        return $addButton . $html;
+    }
+
+    protected function _prepareCollection()
+    {
+        $collection = Mage::getModel('slider/image')
+            ->getCollection()
+            ->addFieldToFilter('slider_id', $this->getRequest()->getParam('id'));
+        $this->setCollection($collection);
+
+        return parent::_prepareCollection();
+    }
+
+    protected function _prepareColumns()
+    {
+        $this->addColumn('entity_id', array(
+            'header' => Mage::helper('slider')->__('ID'),
+            'align' => 'center',
+            'width' => '50px',
+            'index' => 'entity_id',
+        ));
+
+        $this->addColumn('description', array(
+            'header' => 'Description',
+            'align'  =>'left',
+            'index'  => 'description',
+        ));
+
+        $this->addColumn('image', array(
+            'header' => 'Image',
+            'align'  =>'center',
+            'index'  => 'image',
+        ));
+
+        $this->addColumn('action',
+            array(
+                'header'    => 'Action',
+                'width'     => '100px',
+                'type'      => 'action',
+                'getter'    => 'getId',
+                'actions'   => array(
+                    array(
+                        'caption'   => Mage::helper('slider')->__('Edit'),
+                        'url'       => array('base'=> '*/*/edit'),
+                        'field'     => 'id'
+                    )
+                ),
+                'filter'    => false,
+                'sortable'  => false,
+                'index'     => 'stores',
+                'is_system' => true,
+            ));
+
+        return parent::_prepareColumns();
+    }
+
+    public function getRowUrl($row)
+    {
+        return $this->getUrl('*/*/editimage', array('id' => $row->getId(), 'slider_id' => $row->getSliderId()));
+    }
+
 }

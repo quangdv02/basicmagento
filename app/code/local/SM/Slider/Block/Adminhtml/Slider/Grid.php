@@ -36,6 +36,12 @@ class SM_Slider_Block_Adminhtml_Slider_Grid extends Mage_Adminhtml_Block_Widget_
             'index'  => 'content',
         ));
 
+        $this->addColumn('status', array(
+            'header' => 'Status',
+            'align'  =>'left',
+            'index'  => 'status',
+        ));
+
         $this->addColumn('action',
             array(
                 'header'    => 'Action',
