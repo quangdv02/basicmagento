@@ -40,6 +40,11 @@ class SM_Slider_Block_Adminhtml_Slider_Grid extends Mage_Adminhtml_Block_Widget_
             'header' => 'Status',
             'align'  =>'left',
             'index'  => 'status',
+            'type'      => 'options',
+            'options'   => array(
+                1 => 'Enabled',
+                0 => 'Disabled',
+            ),
         ));
 
         $this->addColumn('action',

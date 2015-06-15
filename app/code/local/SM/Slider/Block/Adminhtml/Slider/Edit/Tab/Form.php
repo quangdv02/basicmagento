@@ -14,21 +14,21 @@ class SM_Slider_Block_Adminhtml_Slider_Edit_Tab_Form extends Mage_Adminhtml_Bloc
             'name'      => 'title',
         ));
 
-//        $fieldset->addField('status', 'select', array(
-//            'label'     => Mage::helper('slider')->__('Status'),
-//            'name'      => 'status',
-//            'values'    => array(
-//                array(
-//                    'value'     => 1,
-//                    'label'     => Mage::helper('slider')->__('Active'),
-//                ),
-//
-//                array(
-//                    'value'     => 0,
-//                    'label'     => Mage::helper('slider')->__('Inactive'),
-//                ),
-//            ),
-//        ));
+        $fieldset->addField('status', 'select', array(
+            'label'     => Mage::helper('slider')->__('Status'),
+            'name'      => 'status',
+            'values'    => array(
+                array(
+                    'value'     => 1,
+                    'label'     => Mage::helper('slider')->__('Active'),
+                ),
+
+                array(
+                    'value'     => 0,
+                    'label'     => Mage::helper('slider')->__('Inactive'),
+                ),
+            ),
+        ));
 
         $fieldset->addField('content', 'editor', array(
             'name'      => 'content',

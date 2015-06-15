@@ -18,7 +18,7 @@ class SM_Slider_Block_Adminhtml_Slider_Edit_Tab_Image extends Mage_Adminhtml_Blo
         $addButton = $this->getLayout()->createBlock('adminhtml/widget_button') //create the add button
         ->setData(array(
                 'label' => Mage::helper('adminhtml')->__('Add New Image'),
-                'onclick' => "setLocation('" . $this->getUrl('*/*/newimage/slider_id/' . $sliderId) . "')",
+                'onclick' => "setLocation('" . $this->getUrl('*/image/new/slider_id/' . $sliderId) . "')",
                 'class' => 'add'
             ))->toHtml();
         return $addButton . $html;
