@@ -9,6 +9,13 @@ class SM_Slider_Adminhtml_ImageController extends Mage_Adminhtml_Controller_Acti
         return $this;
     }
 
+    public function indexAction(){
+        $this->_title($this->__('Manage Slider'));
+        $this->loadLayout();
+        $this->_addContent($this->getLayout()->createBlock('slider/adminhtml_image'));
+        $this->renderLayout();
+    }
+
     public function editAction()
     {
         $imgId     = $this->getRequest()->getParam('id');
@@ -57,7 +64,7 @@ class SM_Slider_Adminhtml_ImageController extends Mage_Adminhtml_Controller_Acti
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Item was successfully saved'));
                 Mage::getSingleton('adminhtml/session')->setsliderData(false);
 
-                $this->_redirect('*/*/');
+                $this->_redirect('*/slider/edit/id/'.$postData['slider_id']);
                 return;
             } catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());

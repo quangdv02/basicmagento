@@ -64,7 +64,7 @@ class SM_Slider_Block_Adminhtml_Slider_Edit_Tab_Image extends Mage_Adminhtml_Blo
                 'actions'   => array(
                     array(
                         'caption'   => Mage::helper('slider')->__('Edit'),
-                        'url'       => array('base'=> '*/*/edit'),
+                        'url'       => array('base'=> '*/image/edit'),
                         'field'     => 'id'
                     )
                 ),
@@ -79,7 +79,7 @@ class SM_Slider_Block_Adminhtml_Slider_Edit_Tab_Image extends Mage_Adminhtml_Blo
 
     public function getRowUrl($row)
     {
-        return $this->getUrl('*/*/editimage', array('id' => $row->getId(), 'slider_id' => $row->getSliderId()));
+        return $this->getUrl('*/image/edit', array('id' => $row->getId(), 'slider_id' => $row->getSliderId()));
     }
 
 }

@@ -9,8 +9,27 @@ class SM_Slider_Block_Adminhtml_Slider_Edit extends Mage_Adminhtml_Block_Widget_
         $this->_blockGroup = 'slider';
         $this->_controller = 'adminhtml_slider';
 
+        $this->_addButton('save_and_continue', array(
+            'label' => Mage::helper('adminhtml')->__('Save And Continue Edit'),
+            'onclick' => 'saveAndContinueEdit()',
+            'class' => 'save',
+        ), -100);
         $this->_updateButton('save', 'label', Mage::helper('slider')->__('Save Item'));
         $this->_updateButton('delete', 'label', Mage::helper('slider')->__('Delete Item'));
+
+        $this->_formScripts[] = "
+            function toggleEditor() {
+                if (tinyMCE.getInstanceById('form_content') == null) {
+                    tinyMCE.execCommand('mceAddControl', false, 'edit_form');
+                } else {
+                    tinyMCE.execCommand('mceRemoveControl', false, 'edit_form');
+                }
+            }
+
+            function saveAndContinueEdit(){
+                editForm.submit($('edit_form').action+'back/edit/');
+            }
+        ";
     }
 
     public function getHeaderText()
