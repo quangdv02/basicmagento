@@ -62,13 +62,13 @@ class SM_Slider_Adminhtml_SliderController extends Mage_Adminhtml_Controller_Act
                     ->save();
 
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Item was successfully saved'));
-                Mage::getSingleton('adminhtml/session')->setsliderData(false);
+                Mage::getSingleton('adminhtml/session')->setSliderData(false);
 
                 $this->_redirect('*/*/');
                 return;
             } catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
-                Mage::getSingleton('adminhtml/session')->setsliderData($this->getRequest()->getPost());
+                Mage::getSingleton('adminhtml/session')->setSliderData($this->getRequest()->getPost());
                 $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
                 return;
             }

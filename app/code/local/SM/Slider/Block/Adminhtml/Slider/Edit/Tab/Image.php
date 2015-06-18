@@ -53,6 +53,7 @@ class SM_Slider_Block_Adminhtml_Slider_Edit_Tab_Image extends Mage_Adminhtml_Blo
             'header' => 'Image',
             'align'  =>'center',
             'index'  => 'image',
+            'renderer'  => 'SM_Slider_Block_Adminhtml_Image_Renderer_Image'
         ));
 
         $this->addColumn('action',

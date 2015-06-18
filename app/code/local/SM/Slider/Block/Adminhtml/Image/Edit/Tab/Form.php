@@ -3,17 +3,10 @@ class SM_Slider_Block_Adminhtml_Image_Edit_Tab_Form extends Mage_Adminhtml_Block
 
     protected function _prepareForm()
     {
-        $sliderId = $this->getRequest()->getParam('slider_id');
         $form = new Varien_Data_Form();
         $this->setForm($form);
         $fieldset = $form->addFieldset('image_form', array('legend'=>Mage::helper('slider')->__('Image information')));
 
-        $fieldset->addField('slider_id', 'hidden', array(
-            'class'     => 'required-entry',
-            'required'  => true,
-            'name'      => 'slider_id',
-            'value'     => $sliderId,
-        ));
 
         $fieldset->addField('description', 'editor', array(
             'label'     => Mage::helper('slider')->__('Description'),
@@ -26,10 +19,17 @@ class SM_Slider_Block_Adminhtml_Image_Edit_Tab_Form extends Mage_Adminhtml_Block
         ));
 
 
-        $fieldset->addField('image', 'text', array(
-            'name'      => 'image',
-            'label'     => Mage::helper('slider')->__('Image'),
-            'required'  => true,
+        $fieldset->addField('slider_id', 'text', array(
+            'name'      => 'slider_id',
+            'label'     => Mage::helper('slider')->__('slider id'),
+            'required'  => false,
+        ));
+
+        $fieldset->addField('image', 'file', array(
+            'name' => 'image',
+            'label'     => Mage::helper('slider')->__('Upload Images'),
+//            'class'     => 'required-entry',
+            'required'  => false,
         ));
 
         if ( Mage::getSingleton('adminhtml/session')->getImageData() )

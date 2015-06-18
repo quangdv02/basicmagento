@@ -5,9 +5,9 @@ class SM_Slider_Block_Adminhtml_Image_Edit_Form extends Mage_Adminhtml_Block_Wid
         $form = new Varien_Data_Form(
             array(
                 'id' => 'edit_form',
-                'action' => $this->getUrl('*/*/save', array('id' => $this->getRequest()->getParam('id'))
-                ),
+                'action' => $this->getUrl('*/*/save', array('id' => $this->getRequest()->getParam('id'),'slider_id'=>$this->getRequest()->getParam('slider_id'))),
                 'method' => 'post',
+                'enctype' => 'multipart/form-data',
             )
         );
         $form->setUseContainer(true);

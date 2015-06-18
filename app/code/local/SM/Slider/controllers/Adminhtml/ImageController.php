@@ -50,25 +50,34 @@ class SM_Slider_Adminhtml_ImageController extends Mage_Adminhtml_Controller_Acti
 
     public function saveAction()
     {
+
         if ( $this->getRequest()->getPost() ) {
             try {
                 $postData = $this->getRequest()->getPost();
                 $imgModel = Mage::getModel('slider/image');
+                $sliderId = $this->getRequest()->getParam('slider_id')?$this->getRequest()->getParam('slider_id'):$postData['slider_id'];
+                if ($_FILES['image']['name'] != '') {
+                    $path = Mage::getBaseDir('media') . DS . 'slider';
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777, true);
+                    }
+                    $postData['image'] = $this->uploadImgAction($_FILES['image']['name'], 'image', $path);
+                }
 
                 $imgModel->setId($this->getRequest()->getParam('id'))
                     ->setDescription($postData['description'])
                     ->setImage($postData['image'])
-                    ->setSliderId($postData['slider_id'])
+                    ->setSliderId($sliderId)
                     ->save();
 
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Item was successfully saved'));
-                Mage::getSingleton('adminhtml/session')->setsliderData(false);
+                Mage::getSingleton('adminhtml/session')->setImageData(false);
 
-                $this->_redirect('*/slider/edit/id/'.$postData['slider_id']);
+                $this->_redirect('*/slider/edit/id/'.$sliderId);
                 return;
             } catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
-                Mage::getSingleton('adminhtml/session')->setsliderData($this->getRequest()->getPost());
+                Mage::getSingleton('adminhtml/session')->setImageData($this->getRequest()->getPost());
                 $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
                 return;
             }
@@ -104,5 +113,19 @@ class SM_Slider_Adminhtml_ImageController extends Mage_Adminhtml_Controller_Acti
         $this->getResponse()->setBody(
             $this->getLayout()->createBlock('slider/adminhtml_image_grid')->toHtml()
         );
+    }
+
+    public function uploadImgAction($files_name, $prefix_name, $path)
+    {
+        $fileName = $files_name;
+        $fileExt = strtolower(substr(strrchr($fileName, "."), 1));
+        $fileNamewoe = uniqid($prefix_name);
+        $fileName = str_replace(' ', '', $fileNamewoe) . '.' . $fileExt;
+        $uploader = new Varien_File_Uploader($prefix_name);
+        $uploader->setAllowedExtensions(array('jpg', 'jpeg', 'gif', 'png'));
+        $uploader->setAllowRenameFiles(false);
+        $uploader->setFilesDispersion(false);
+        $uploader->save($path, $fileName);
+        return $fileName;
     }
 }
