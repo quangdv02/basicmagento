@@ -60,7 +60,15 @@ class SM_Slider_Adminhtml_SliderController extends Mage_Adminhtml_Controller_Act
                     ->setContent($postData['content'])
                     ->setStatus($postData['status'])
                     ->save();
-
+//                echo $sliderModel->getId();
+//                die();
+                if($postData['status']==1){
+                    $otherData = Mage::getModel('slider/slider')->getCollection()->addFieldToFilter('entity_id',array('neq'=>$sliderModel->getId()));
+                    foreach ($otherData as $val) {
+                        $val->setStatus(0);
+                        $val->save();
+                    }
+                }
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Item was successfully saved'));
                 Mage::getSingleton('adminhtml/session')->setSliderData(false);
 
@@ -80,12 +88,12 @@ class SM_Slider_Adminhtml_SliderController extends Mage_Adminhtml_Controller_Act
     {
         if( $this->getRequest()->getParam('id') > 0 ) {
             try {
-                $sliderModel = Mage::getModel('<module>/<module>');
+                $sliderModel = Mage::getModel('slider/slider');
 
                 $sliderModel->setId($this->getRequest()->getParam('id'))
                     ->delete();
 
-                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Item was successfully deleted'));
+                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('slider')->__('Item was successfully deleted'));
                 $this->_redirect('*/*/');
             } catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());

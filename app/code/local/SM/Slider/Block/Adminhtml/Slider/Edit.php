@@ -9,8 +9,8 @@ class SM_Slider_Block_Adminhtml_Slider_Edit extends Mage_Adminhtml_Block_Widget_
         $this->_blockGroup = 'slider';
         $this->_controller = 'adminhtml_slider';
 
-        $this->_addButton('save_and_continue', array(
-            'label' => Mage::helper('adminhtml')->__('Save And Continue Edit'),
+        $this->_addButton('saveandcontinue', array(
+            'label' => Mage::helper('slider')->__('Save And Continue Edit'),
             'onclick' => 'saveAndContinueEdit()',
             'class' => 'save',
         ), -100);

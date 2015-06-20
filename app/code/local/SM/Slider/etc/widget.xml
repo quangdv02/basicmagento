@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<widgets>
+    <sm_slider type="slider/slider">
+        <name>SM slider</name>
+        <description>Slider cua quang</description>
+        <parameters>
+            <title>
+                <label>Title widget:</label>
+                <type>text</type>
+                <required>1</required>
+                <visible>1</visible>
+            </title>
+            <template>
+                <label>SM Slider Template</label>
+                <type>select</type>
+                <values>
+                    <default>
+                        <label>Default Template</label>
+                        <value>sm/slider/slider.phtml</value>
+                    </default>
+                </values>
+                <sort_order>30</sort_order>
+                <visible>1</visible>
+            </template>
+        </parameters>
+    </sm_slider>
+</widgets>
