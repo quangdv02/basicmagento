@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <SM_Featured>
+            <active>true</active>
+            <codePool>local</codePool>
+        </SM_Featured>
+    </modules>
+</config>

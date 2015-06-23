@@ -1,0 +1,21 @@
+<config>
+    <modules>
+        <SM_Featured>
+            <version>0.1.3</version>
+        </SM_Featured>
+    </modules>
+    <global>
+        <models>
+            <featured>
+                <class>SM_Featured_Model</class>
+            </featured>
+        </models>
+        <resources>
+            <sm_featured_setup>
+                <setup>
+                    <module>SM_Featured</module>
+                </setup>
+            </sm_featured_setup>
+        </resources>
+    </global>
+</config>
