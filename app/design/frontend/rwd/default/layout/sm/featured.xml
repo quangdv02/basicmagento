@@ -1,0 +1,26 @@
+<layout>
+    <featured_index_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/sm/swiper.min.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/sm/swiper.min.css</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <reference name="content">
+                <block type="featured/featured" name="sm.featured" after="sm.slider">
+                    <action method="setTemplate">
+                        <template>sm/featured/featured.phtml</template>
+                    </action>
+                </block>
+            </reference>
+        </reference>
+    </featured_index_index>
+    <cms_index_index>
+        <update handle="featured_index_index" />
+    </cms_index_index>
+</layout>
