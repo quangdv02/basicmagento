@@ -1,54 +1,59 @@
 <?php
-    $type = $this->getType();
-    $qty = $this->getQty();
-    $image = $this->getImage();
+$type = $this->getType();
+$qty = $this->getQty();
+$image = $this->getImage();
 ?>
-<div class="swiper-container">
+<style>
+    .big-slider .swiper-slide img{
+        height: 100%;
+    }
+</style>
+<div class="swiper-container big-slider">
     <div class="swiper-wrapper">
-        <?php foreach($image as $val): ?>
-        <div class="swiper-slide"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'slider/'.$val['image']; ?>"/></div>
-        <?php endforeach;?>
+        <?php foreach ($image as $val): ?>
+            <div class="swiper-slide"><img
+                    src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'slider/' . $val['image']; ?>"/>
+            </div>
+        <?php endforeach; ?>
     </div>
     <!-- Add Pagination -->
-    <?php if($type != 1):?>
-    <div class="swiper-pagination"></div>
-    <?php endif;?>
+    <?php if ($type != 1): ?>
+        <div class="swiper-pagination"></div>
+    <?php endif; ?>
     <!-- Add Arrows -->
-    <?php if($type == 4):?>
+    <?php if ($type == 4): ?>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
-    <?php endif;?>
+    <?php endif; ?>
 </div>
 <script>
-    jQuery(document).ready(function(){
-        var type = <?php echo $this->getType(); ?>;
-        switch(type){
-            case '1':
-                var swiper = new Swiper('.swiper-container');
-                break;
-            case '2':
-                var swiper = new Swiper('.swiper-container', {
-                    pagination: '.swiper-pagination',
-                    paginationClickable: true
-                });
-                break;
-            case '3':
-                var swiper = new Swiper('.swiper-container', {
-                    pagination: '.swiper-pagination',
-                    paginationClickable: true,
-                    direction: 'vertical'
-                });
-                break;
-            default :
-                var swiper = new Swiper('.swiper-container', {
-                    pagination: '.swiper-pagination',
-                    paginationClickable: '.swiper-pagination',
-                    nextButton: '.swiper-button-next',
-                    prevButton: '.swiper-button-prev',
-                    spaceBetween: 30
-                });
-                break;
-        }
-
-    });
+    var type = <?php echo $this->getType(); ?>;
+    switch (type) {
+        case '1':
+            var swiper = new Swiper('.swiper-container');
+            break;
+        case '2':
+            var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                paginationClickable: true
+            });
+            break;
+        case '3':
+            var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+                direction: 'vertical'
+            });
+            break;
+        default :
+            var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                paginationClickable: '.swiper-pagination',
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+                spaceBetween: 30
+            });
+            break;
+    }
 </script>
+

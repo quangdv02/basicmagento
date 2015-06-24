@@ -28,6 +28,11 @@
                 <class>SM_Featured_Block</class>
             </featured>
         </blocks>
+        <helpers>
+            <featured>
+                <class>SM_Featured_Helper</class>
+            </featured>
+        </helpers>
         <models>
             <featured>
                 <class>SM_Featured_Model</class>

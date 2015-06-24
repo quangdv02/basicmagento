@@ -12,8 +12,8 @@
         </reference>
         <reference name="content">
             <reference name="content">
-                <block type="featured/featured" name="sm.featured" after="sm.slider">
-                    <action method="setTemplate">
+                <block type="featured/featured" name="sm.featured" after="--">
+                    <action method="setTemplate" ifconfig="featured_options/option/enable">
                         <template>sm/featured/featured.phtml</template>
                     </action>
                 </block>
@@ -23,4 +23,7 @@
     <cms_index_index>
         <update handle="featured_index_index" />
     </cms_index_index>
+    <catalog_category_view>
+        <update handle="featured_index_index" />
+    </catalog_category_view>
 </layout>
