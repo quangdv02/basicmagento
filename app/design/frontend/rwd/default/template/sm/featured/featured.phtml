@@ -2,7 +2,9 @@
     $product = $this->getFeaturedProduct();
 $_imgSize = 210;
 ?>
+
 <div class="swiper-container swiper-container1">
+    <h2>Feature Products</h2>
     <div class="swiper-wrapper">
         <?php foreach($product as $val): ?>
         <div class="swiper-slide"><img src="<?php echo $this->helper('catalog/image')->init($val, 'small_image')->keepFrame(false)->resize($_imgSize); ?>"/></div>

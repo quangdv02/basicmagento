@@ -10,7 +10,7 @@
             <action method="addItem"><type>skin_css</type><name>css/sm/swiper.min.css</name></action>
         </reference>
         <reference name="content">
-            <block type="slider/slider" name="sm.slider">
+            <block type="slider/slider" name="sm.slider" as="sm.slider" after="-">
                 <action method="setTemplate" ifconfig="slider_options/option/enable">
                     <template>sm/slider/slider.phtml</template>
                 </action>

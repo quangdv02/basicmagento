@@ -1,5 +1,5 @@
 <layout>
-    <featured_index_index>
+    <bestseller_index_index>
         <reference name="head">
             <action method="addItem">
                 <type>skin_js</type>
@@ -12,16 +12,16 @@
         </reference>
         <reference name="content">
             <reference name="content">
-                <block type="featured/featured" name="sm.featured" as="sm.featured" after="sm.slider">
-                    <action method="setTemplate" ifconfig="featured_options/option/enable">
-                        <template>sm/featured/featured.phtml</template>
+                <block type="bestseller/bestseller" name="sm.bestseller" as="sm.bestseller" after="sm.slider">
+                    <action method="setTemplate" ifconfig="bestseller_options/option/enable">
+                        <template>sm/bestseller/bestseller.phtml</template>
                     </action>
                 </block>
             </reference>
         </reference>
-    </featured_index_index>
+    </bestseller_index_index>
     <cms_index_index>
-        <update handle="featured_index_index" />
+        <update handle="bestseller_index_index" />
     </cms_index_index>
     <catalog_category_view>
         <reference name="head">
@@ -36,9 +36,9 @@
         </reference>
         <reference name="content">
             <reference name="content">
-                <block type="featured/featured" name="sm.featured" as="sm.featured" after="category.products">
-                    <action method="setTemplate" ifconfig="featured_options/option/enable">
-                        <template>sm/featured/featured.phtml</template>
+                <block type="bestseller/bestseller" name="sm.bestseller" as="sm.bestseller" after="sm.featured">
+                    <action method="setTemplate" ifconfig="bestseller_options/option/enable">
+                        <template>sm/bestseller/bestseller.phtml</template>
                     </action>
                 </block>
             </reference>
