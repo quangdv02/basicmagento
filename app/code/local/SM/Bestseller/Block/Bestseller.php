@@ -8,9 +8,9 @@ class SM_Bestseller_Block_Bestseller extends Mage_Core_Block_Template{
 
     public function getBestSellerProduct(){
         $category = Mage::registry('current_category');
-        $products = Mage::getResourceModel('reports/product_collection')
+        $products = Mage::getResourceModel('reports/product_collection')->addAttributeToSelect('*')
             ->addOrderedQty()
-            ->addAttributeToSelect('*')
+
             ->setOrder('ordered_qty', 'desc')->setPageSize($this->getQty())->load();
 
         if($category)
